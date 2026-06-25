@@ -1,5 +1,7 @@
 "use client";
 
+import kioskImage from "../../public/Images/kiosk-showcase.png";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "../container";
@@ -156,7 +158,7 @@ export function ProductShowcase() {
             </div> */}
             <div className="relative aspect-square rounded-2xl overflow-hidden">
               <Image
-                src="/images/kiosk-showcase.png"
+                src={kioskImage}
                 alt="Premium Fleur Charge Kiosk"
                 fill
                 className="object-contain bg-black"

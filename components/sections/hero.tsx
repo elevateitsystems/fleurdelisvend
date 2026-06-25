@@ -179,6 +179,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "../container";
 import { Button } from "../button";
+import heroImage from "../../public/Images/hero.png";
 
 export function Hero() {
   const [displayStats, setDisplayStats] = useState({
@@ -208,7 +209,7 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/images/hero.png"
+        src={heroImage}
         alt="Phone Charging Kiosk"
         fill
         priority

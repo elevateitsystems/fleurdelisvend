@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Container } from '../container';
-
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Container } from "../container";
+import Image from "next/image";
 export function ProductShowcase() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const features = [
-    'Ultra-Fast Wireless Charging',
-    'Multiple Cable Options Included',
-    'Sleek Stainless Steel Design',
-    'Weather-Resistant Exterior',
-    'Smart Usage Tracking',
-    'Remote Diagnostics',
+    "Ultra-Fast Wireless Charging",
+    "Multiple Cable Options Included",
+    "Sleek Stainless Steel Design",
+    "Weather-Resistant Exterior",
+    "Smart Usage Tracking",
+    "Remote Diagnostics",
   ];
 
   return (
@@ -43,7 +43,7 @@ export function ProductShowcase() {
             className="cursor-pointer relative group"
             onClick={() => setLightboxOpen(true)}
           >
-            <div className="aspect-square bg-gradient-to-br from-secondary to-muted rounded-2xl overflow-hidden relative">
+            {/* <div className="aspect-square bg-gradient-to-br from-secondary to-muted rounded-2xl overflow-hidden relative">
               <div className="w-full h-full bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-7xl mb-4">⚡</div>
@@ -55,6 +55,23 @@ export function ProductShowcase() {
                   <p className="text-white font-semibold">Click to enlarge</p>
                 </div>
               </div>
+            </div> */}
+            <div className="aspect-square rounded-2xl overflow-hidden relative">
+              <Image
+                src="/images/kiosk-showcase.png"
+                alt="Fleur Charge Kiosk"
+                fill
+                priority
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                  <p className="text-white font-semibold text-lg">
+                    Click to Enlarge
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -64,9 +81,13 @@ export function ProductShowcase() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-3xl font-bold text-foreground mb-6">Built for Success</h3>
+            <h3 className="text-3xl font-bold text-foreground mb-6">
+              Built for Success
+            </h3>
             <p className="text-muted-foreground mb-8 text-lg">
-              Our kiosks are engineered for high-traffic venues with enterprise-grade durability and modern aesthetics that complement any environment.
+              Our kiosks are engineered for high-traffic venues with
+              enterprise-grade durability and modern aesthetics that complement
+              any environment.
             </p>
 
             <div className="space-y-4 mb-8">
@@ -88,7 +109,9 @@ export function ProductShowcase() {
             </div>
 
             <div className="bg-secondary rounded-lg p-6 border border-border">
-              <p className="text-sm text-muted-foreground mb-2">Performance Metrics</p>
+              <p className="text-sm text-muted-foreground mb-2">
+                Performance Metrics
+              </p>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="font-semibold text-foreground">99.9%</p>
@@ -125,11 +148,19 @@ export function ProductShowcase() {
             >
               ✕
             </button>
-            <div className="aspect-square bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl flex items-center justify-center">
+            {/* <div className="aspect-square bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl flex items-center justify-center">
               <div className="text-center">
                 <div className="text-9xl mb-4">⚡</div>
                 <p className="text-white text-xl">Premium Fleur Charge Kiosk</p>
               </div>
+            </div> */}
+            <div className="relative aspect-square rounded-2xl overflow-hidden">
+              <Image
+                src="/images/kiosk-showcase.png"
+                alt="Premium Fleur Charge Kiosk"
+                fill
+                className="object-contain bg-black"
+              />
             </div>
           </motion.div>
         </motion.div>

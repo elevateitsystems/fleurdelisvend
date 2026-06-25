@@ -1,11 +1,10 @@
 "use client";
 
-import kioskImage from "../../public/Images/kiosk-showcase.png";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "../container";
 import Image from "next/image";
+import kioskImage from "../../public/Images/kiosk-showcase-1.png";
 export function ProductShowcase() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -60,7 +59,7 @@ export function ProductShowcase() {
             </div> */}
             <div className="aspect-square rounded-2xl overflow-hidden relative">
               <Image
-                src="/images/kiosk-showcase.png"
+                src={kioskImage}
                 alt="Fleur Charge Kiosk"
                 fill
                 priority

@@ -1,33 +1,38 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Container } from '../container';
-
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Container } from "../container";
 const faqs = [
   {
-    question: 'What venues are eligible for Fleur Charge?',
-    answer: 'We partner with gyms, fitness centers, colleges, universities, casinos, hotels, bars, restaurants, and any high-traffic venue. Minimum traffic requirement is 500+ daily visitors.',
+    question: "What types of businesses can host a Fleur Charge kiosk?",
+    answer:
+      "Fleur Charge is designed for hotels, resorts, fitness centers, universities, healthcare facilities, casinos, retail locations, restaurants, and other high-traffic venues looking to enhance the guest experience.",
   },
   {
-    question: 'How much does it cost to get started?',
-    answer: 'Zero upfront cost. No installation fees, no equipment charges. We handle everything. You simply earn 50% of revenue from day one.',
+    question: "How does the installation process work?",
+    answer:
+      "Our team handles the entire process—from planning and delivery to professional installation and setup. We ensure your kiosk is ready with minimal disruption to your business.",
   },
   {
-    question: 'How is revenue calculated?',
-    answer: 'Revenue is based on actual charges made through the kiosk. Each charge costs customers $2-3 depending on device type. You earn 50% directly, with transparent tracking via your dashboard.',
+    question: "Who is responsible for maintenance and support?",
+    answer:
+      "Fleur Charge provides a fully managed solution. We handle ongoing maintenance, remote monitoring, software updates, and technical support so your team can stay focused on serving guests.",
   },
   {
-    question: 'What if the kiosk breaks?',
-    answer: 'We provide 24/7 technical support and will replace or repair any equipment at no cost. Our kiosks have 99.9% uptime SLA.',
+    question: "Can the kiosk be customized for my venue?",
+    answer:
+      "Depending on your location and deployment requirements, we can discuss branding and configuration options to ensure the kiosk complements your venue and customer experience.",
   },
   {
-    question: 'Can I remove the kiosk if I\'m unhappy?',
-    answer: 'Yes. There are no long-term contracts. You can cancel anytime with 30 days notice. We\'ll remove the kiosk free of charge.',
+    question: "What partnership options are available?",
+    answer:
+      "We offer flexible deployment and partnership models based on your business needs. Revenue-sharing opportunities may be available where appropriate, but our primary focus is delivering a premium charging amenity for your guests.",
   },
   {
-    question: 'How do I get paid?',
-    answer: 'Revenue is paid monthly via direct deposit to your business account. Payments are typically processed on the first business day of each month.',
+    question: "How do I get started?",
+    answer:
+      "Simply request a consultation through our contact form. Our team will learn about your venue, discuss the best solution, and guide you through the next steps.",
   },
 ];
 
@@ -45,11 +50,17 @@ export function FAQ() {
           className="text-center mb-12"
         >
           <p className="text-sm text-accent font-semibold uppercase tracking-wide mb-2">
-            Questions & Answers
-          </p>
-          <h2 className="text-4xl font-bold text-foreground mb-4">
             Frequently Asked Questions
+          </p>
+
+          <h2 className="text-4xl font-bold text-foreground mb-4">
+            Everything You Need to Know
           </h2>
+
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Learn how Fleur Charge helps businesses provide a premium charging
+            experience with fully managed installation, monitoring, and support.
+          </p>
         </motion.div>
 
         <div className="max-w-3xl mx-auto space-y-4">
@@ -66,7 +77,9 @@ export function FAQ() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full px-6 py-4 bg-card hover:bg-secondary transition-colors flex items-center justify-between text-left"
               >
-                <h3 className="font-semibold text-foreground">{faq.question}</h3>
+                <h3 className="font-semibold text-foreground">
+                  {faq.question}
+                </h3>
                 <motion.div
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
@@ -79,7 +92,7 @@ export function FAQ() {
                 {openIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                     className="border-t border-border"

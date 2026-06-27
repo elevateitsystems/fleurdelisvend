@@ -1,28 +1,30 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Container } from '../container';
-import { Input } from '../input';
-import { Button } from '../button';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Container } from "../container";
+import { Input } from "../input";
+import { Button } from "../button";
 
 interface FormData {
   name: string;
   email: string;
   phone: string;
   venue: string;
+  message: string;
   businessType: string;
   monthlyVisitors: string;
 }
 
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    venue: '',
-    businessType: '',
-    monthlyVisitors: '',
+    name: "",
+    email: "",
+    phone: "",
+    venue: "",
+    message: "",
+    businessType: "",
+    monthlyVisitors: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -32,15 +34,16 @@ export function ContactForm() {
   const validateForm = (): boolean => {
     const newErrors: Partial<FormData> = {};
 
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      newErrors.email = 'Valid email is required';
+      newErrors.email = "Valid email is required";
     }
     if (!formData.phone.match(/^\+?[\d\s\-()]{10,}$/)) {
-      newErrors.phone = 'Valid phone number is required';
+      newErrors.phone = "Valid phone number is required";
     }
-    if (!formData.venue.trim()) newErrors.venue = 'Venue name is required';
-    if (!formData.businessType) newErrors.businessType = 'Please select a business type';
+    if (!formData.venue.trim()) newErrors.venue = "Venue name is required";
+    if (!formData.businessType)
+      newErrors.businessType = "Please select a business type";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -56,24 +59,27 @@ export function ContactForm() {
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
     setSubmitted(true);
     setLoading(false);
 
     setTimeout(() => {
       setSubmitted(false);
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        venue: '',
-        businessType: '',
-        monthlyVisitors: '',
+        name: "",
+        email: "",
+        phone: "",
+        venue: "",
+        businessType: "",
+        message: "",
+        monthlyVisitors: "",
       });
     }, 3000);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormData]) {
@@ -93,13 +99,16 @@ export function ContactForm() {
         >
           <div className="text-center mb-12">
             <p className="text-sm text-accent font-semibold uppercase tracking-wide mb-2">
-              Get Started
+              Host a Fleur Charge Kiosk
             </p>
+
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              Join Fleur Charge Today
+              Bring Premium Charging to Your Venue
             </h2>
+
             <p className="text-lg text-muted-foreground">
-              Fill out the form below and our team will contact you within 24 hours.
+              Tell us about your business and our team will help you find the
+              right Fleur Charge solution for your guests.
             </p>
           </div>
 
@@ -114,11 +123,15 @@ export function ContactForm() {
                 Thank you!
               </h3>
               <p className="text-muted-foreground">
-                We&apos;ve received your information. Our team will reach out within 24 hours to discuss partnership opportunities.
+                We&apos;ve received your information. Our team will reach out
+                within 24 hours to discuss partnership opportunities.
               </p>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6 bg-card border border-border rounded-lg p-8">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6 bg-card border border-border rounded-lg p-8"
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
                   label="Your Name"
@@ -154,7 +167,7 @@ export function ContactForm() {
                   value={formData.venue}
                   onChange={handleChange}
                   error={errors.venue}
-                  placeholder="Gold's Gym Downtown"
+                  placeholder="Your Business or Venue Name"
                 />
               </div>
 
@@ -169,33 +182,57 @@ export function ContactForm() {
                     onChange={handleChange}
                     className="w-full px-4 py-2 rounded-lg border border-border bg-input text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all"
                   >
-                    <option value="">Select a business type</option>
-                    <option value="fitness">Fitness Center</option>
-                    <option value="college">College/University</option>
+                    <option value="">Select your business type</option>
+                    <option value="hotel">Hotel / Resort</option>
+                    <option value="fitness">Fitness Center / Gym</option>
+                    <option value="education">College / University</option>
+                    <option value="healthcare">Healthcare Facility</option>
                     <option value="casino">Casino</option>
-                    <option value="hospitality">Hospitality/Hotel</option>
-                    <option value="restaurant">Restaurant/Bar</option>
+                    <option value="restaurant">Restaurant / Café</option>
+                    <option value="retail">Retail Store</option>
+                    <option value="office">Office Building</option>
                     <option value="other">Other</option>
                   </select>
                   {errors.businessType && (
-                    <p className="text-destructive text-sm mt-1">{errors.businessType}</p>
+                    <p className="text-destructive text-sm mt-1">
+                      {errors.businessType}
+                    </p>
                   )}
                 </div>
                 <Input
-                  label="Monthly Visitors (approx)"
+                  label="Estimated Monthly Visitors"
                   name="monthlyVisitors"
                   value={formData.monthlyVisitors}
                   onChange={handleChange}
-                  placeholder="e.g., 5,000"
+                  placeholder="guests"
                 />
+                <div className="col-span-2 ">
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Tell Us About Your Venue
+                  </label>
+
+                  <textarea
+                    name="message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell us about your venue, customer traffic, or any questions you have..."
+                    className="w-full rounded-lg border border-border bg-input px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                  />
+                </div>
               </div>
 
-              <Button type="submit" size="lg" className="w-full" disabled={loading}>
-                {loading ? 'Submitting...' : 'Get Started Now'}
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full"
+                disabled={loading}
+              >
+                {loading ? "Submitting..." : "Request a Consultation"}
               </Button>
 
               <p className="text-center text-sm text-muted-foreground">
-                We&apos;ll never share your information. Read our{' '}
+                We&apos;ll never share your information. Read our{" "}
                 <a href="#" className="text-accent hover:underline">
                   privacy policy
                 </a>

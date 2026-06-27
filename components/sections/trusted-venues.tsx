@@ -1,48 +1,88 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Container } from '../container';
+import { motion } from "framer-motion";
+import { Container } from "../container";
 
-const venues = [
-  { name: 'Gold\'s Gym', type: 'Fitness Centers' },
-  { name: 'Harvard University', type: 'Educational Institutions' },
-  { name: 'The Bellagio', type: 'Hospitality' },
-  { name: 'Planet Fitness', type: 'Fitness Centers' },
-  { name: 'Stanford University', type: 'Educational Institutions' },
-  { name: 'MGM Resorts', type: 'Hospitality' },
+const venueTypes = [
+  {
+    title: "Hotels & Resorts",
+    description:
+      "Provide guests with a premium, secure charging experience that enhances their stay.",
+  },
+  {
+    title: "Fitness Centers",
+    description:
+      "Help members stay connected while they focus on their workouts.",
+  },
+  {
+    title: "Universities & Colleges",
+    description:
+      "Offer students, faculty, and visitors a convenient campus amenity.",
+  },
+  {
+    title: "Casinos & Entertainment",
+    description:
+      "Keep guests engaged longer with secure phone charging solutions.",
+  },
+  {
+    title: "Healthcare Facilities",
+    description:
+      "Support patients and visitors with reliable charging when they need it most.",
+  },
+  {
+    title: "Shopping Centers",
+    description:
+      "Increase customer convenience and create a more enjoyable shopping experience.",
+  },
 ];
 
 export function TrustedVenues() {
   return (
-    <section className="py-16 bg-background border-t border-border">
+    <section className="py-20 bg-background border-t border-border">
       <Container>
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center max-w-3xl mx-auto mb-14"
         >
-          <p className="text-sm text-accent font-semibold uppercase tracking-wide mb-2">
-            Trusted by Leading Venues
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">
+            Perfect for Every Venue
           </p>
-          <h2 className="text-3xl font-bold text-foreground">
-            Partnering with the Best
+
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+            Designed for Businesses That Value Exceptional Guest Experiences
           </h2>
+
+          <p className="text-lg text-muted-foreground">
+            Fleur Charge provides premium phone charging kiosks that enhance
+            customer convenience while delivering a fully managed solution with
+            installation, real-time monitoring, maintenance, and professional
+            support.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {venues.map((venue, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {venueTypes.map((venue, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              key={venue.title}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+              }}
               viewport={{ once: true }}
-              className="p-4 rounded-lg border border-border hover:border-accent transition-colors bg-card"
+              className="rounded-2xl border border-border bg-card p-8 hover:border-accent hover:shadow-lg transition-all duration-300"
             >
-              <p className="font-semibold text-foreground">{venue.name}</p>
-              <p className="text-sm text-muted-foreground">{venue.type}</p>
+              <h3 className="text-xl font-semibold text-foreground mb-3">
+                {venue.title}
+              </h3>
+
+              <p className="text-muted-foreground leading-relaxed">
+                {venue.description}
+              </p>
             </motion.div>
           ))}
         </div>

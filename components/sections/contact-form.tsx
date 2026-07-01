@@ -1,3 +1,4 @@
+// @app/components/sections/contact-form.tsx
 "use client";
 
 import { useState } from "react";
@@ -56,29 +57,45 @@ export function ContactForm() {
 
     setLoading(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setLoading(false);
-
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        venue: "",
-        businessType: "",
-        message: "",
-        monthlyVisitors: "",
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setSubmitted(true);
+      
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          venue: "",
+          businessType: "",
+          message: "",
+          monthlyVisitors: "",
+        });
+      }, 3000);
+    } catch (error: any) {
+      console.error('Form submission error:', error);
+      alert(error.message || 'Failed to submit form. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -204,22 +221,22 @@ export function ContactForm() {
                   name="monthlyVisitors"
                   value={formData.monthlyVisitors}
                   onChange={handleChange}
-                  placeholder="guests"
+                  placeholder="e.g., 5000+"
                 />
-                <div className="col-span-2 ">
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Tell Us About Your Venue
-                  </label>
+              </div>
 
-                  <textarea
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your venue, customer traffic, or any questions you have..."
-                    className="w-full rounded-lg border border-border bg-input px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Tell Us About Your Venue
+                </label>
+                <textarea
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell us about your venue, customer traffic, or any questions you have..."
+                  className="w-full rounded-lg border border-border bg-input px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all resize-none"
+                />
               </div>
 
               <Button
